@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loopstation — Sonos Groovebox</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="panel">
+    <header class="masthead">
+      <div class="brand">
+        <span class="brand-mark"></span>
+        <h1>LOOPSTATION<span class="brand-sub">SONOS EDITION</span></h1>
+      </div>
+      <div class="lcd" id="lcd">
+        <span id="lcd-line1">READY — TAP A PAD OR PRESS PLAY</span>
+        <span id="lcd-line2">BPM 100 · 16 STEPS · REC OFF</span>
+      </div>
+    </header>
+
+    <div class="deck">
+      <!-- ===================== TRANSPORT / LOOP RING ===================== -->
+      <section class="module transport">
+        <h2 class="silkscreen">TRANSPORT</h2>
+
+        <svg id="loop-ring" viewBox="0 0 200 200" aria-label="Loop position">
+          <circle cx="100" cy="100" r="78" class="ring-track" />
+          <g id="ring-leds"></g>
+          <line id="ring-needle" x1="100" y1="100" x2="100" y2="30" />
+          <circle cx="100" cy="100" r="6" class="ring-hub" />
+        </svg>
+
+        <div class="transport-buttons">
+          <button id="btn-play" class="hw-btn" title="Play / stop the loop in the browser">PLAY</button>
+          <button id="btn-rec" class="hw-btn rec" title="Record pad hits into the loop (quantized)">REC</button>
+          <button id="btn-clear" class="hw-btn" title="Clear the whole pattern">CLR</button>
+        </div>
+
+        <div class="knob-row">
+          <label class="silkscreen" for="bpm">BPM
+            <input type="range" id="bpm" min="60" max="180" value="100" />
+            <span id="bpm-val" class="value-chip">100</span>
+          </label>
+          <label class="silkscreen" for="swing">SWING
+            <input type="range" id="swing" min="0" max="100" value="0" />
+            <span id="swing-val" class="value-chip">0</span>
+          </label>
+          <label class="silkscreen" for="master-gain">GAIN
+            <input type="range" id="master-gain" min="0" max="100" value="80" />
+            <span id="gain-val" class="value-chip">80</span>
+          </label>
+        </div>
+
+        <div class="transport-buttons file-row">
+          <button id="btn-save" class="hw-btn" title="Download the pattern as JSON">SAVE</button>
+          <button id="btn-load" class="hw-btn" title="Load a saved pattern JSON">LOAD</button>
+          <input type="file" id="file-load" accept="application/json" hidden />
+        </div>
+      </section>
+
+      <!-- ===================== PADS + STEP GRID ===================== -->
+      <section class="module sequencer">
+        <h2 class="silkscreen">PADS <span class="hint">— keys 1–8 · REC to overdub into the loop</span></h2>
+        <div class="pad-grid" id="pad-grid"></div>
+
+        <h2 class="silkscreen">PATTERN <span class="hint">— click steps to toggle</span></h2>
+        <div class="step-grid" id="step-grid"></div>
+
+        <h2 class="silkscreen lane-title">SYNTH &amp; BASS <span class="hint">— pick a note, then click steps to place it (click again to clear)</span></h2>
+        <div id="melodic-lanes"></div>
+      </section>
+
+      <!-- ===================== SONOS RACK ===================== -->
+      <section class="module sonos">
+        <h2 class="silkscreen">SONOS OUTPUT <button id="btn-refresh" class="mini-btn" title="Re-scan the network">RESCAN</button></h2>
+        <div id="speaker-list" class="speaker-list">
+          <p class="empty-note">Scanning for speakers…</p>
+        </div>
+
+        <div class="sync-row silkscreen">
+          <label><input type="radio" name="syncmode" value="grouped" checked /> GROUPED (in sync)</label>
+          <label><input type="radio" name="syncmode" value="independent" /> INDEPENDENT</label>
+        </div>
+
+        <div class="push-row">
+          <button id="btn-push" class="hw-btn push">PUSH LOOP → SONOS</button>
+          <button id="btn-sonos-stop" class="hw-btn">STOP SONOS</button>
+        </div>
+        <p id="sonos-status" class="status-line"></p>
+      </section>
+    </div>
+
+    <footer class="silkscreen footnote">
+      LOOP RENDERS ×8 PER PUSH FOR NEAR-GAPLESS REPEAT · SPEAKERS FETCH AUDIO FROM THIS MACHINE — KEEP IT ON THE SAME NETWORK
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
