@@ -4,6 +4,7 @@
 > BASS and SYNTH note lanes — that renders your groove to a WAV and loops it on
 > your Sonos speakers (Era 100, Move 2, or any S2 device), with per-speaker
 > volume control.
+> 
 
 ![image](images/webapp.png)
 
